@@ -128,9 +128,9 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
-        return response()->json([
-            'message' => 'Hasta pronto!'
-        ]);
+        $token = $request->user()->token();
+        $token ->revoke();
+
+        return response()->json('Hasta pronto!');
     }
 }
