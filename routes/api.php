@@ -24,6 +24,6 @@ Route::post('login', [PassportAuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::resource('posts', PostController::class);
     Route::resource('users', UserController::class);
-    Route::resource('users/logout', UserController::class);
+    Route::post('users/logout', [UserController::class,'logout']); 
     
 });
