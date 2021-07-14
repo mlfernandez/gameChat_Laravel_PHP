@@ -15,6 +15,38 @@ class UserController extends Controller
     public function index()
     {
         //
+
+        $user = auth()->user()->find($id);
+        if($user->id===15){
+            return response() ->json([
+                'success' => true,
+                'data' => $users,
+            ];
+        }
+        return response() ->json([
+            'success' => false,
+            'data' => 'Necesitas ser administrador.'
+        ], 400);
+
+        /* $user = auth()->user();
+
+        $users = User::all();
+
+        if($user->id === 15){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $users,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'Necesitas ser administrador.',
+            ], 400);
+
+        } */
         
     }
 
