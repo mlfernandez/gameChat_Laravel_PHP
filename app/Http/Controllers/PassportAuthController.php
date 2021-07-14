@@ -14,6 +14,7 @@ class PassportAuthController extends Controller
         $this->validate($request, [
             'name' => 'required|min:4',
             'username' => 'required|min:4',
+            'steamUsername' => 'nullable|min:4',
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
@@ -21,6 +22,7 @@ class PassportAuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
+            'steamUsername' => $request->steamUsername,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
