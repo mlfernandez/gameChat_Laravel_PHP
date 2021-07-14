@@ -59,9 +59,34 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
+
+        {
+            $user = auth()->user()->find($id);
+            if(!$user){
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Usario no encontrado',
+                ], 400);
+            }    
+            $updated = $user->update([
+                'username' => $request->input('username'),
+                'streamUsername' => $request->input('streamUsername'),
+                'email' => $request->input('email'),
+            ]);
+            if($updated){
+                return response() ->json([
+                    'success' => true,
+                ]);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'El usuario no se puede actualizar',
+                ], 500);
+            }
+        }
     }
 
     /**
@@ -70,8 +95,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
+        $user = auth()->user()->find($id);
+
+        $user->delete();
     }
 }
