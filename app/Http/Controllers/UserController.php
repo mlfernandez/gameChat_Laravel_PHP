@@ -73,7 +73,7 @@ class UserController extends Controller
             }    
             $updated = $user->update([
                 'username' => $request->input('username'),
-                'streamUsername' => $request->input('streamUsername'),
+                'steamUsername' => $request->input('steamUsername'),
                 'email' => $request->input('email'),
             ]);
             if($updated){
@@ -100,6 +100,15 @@ class UserController extends Controller
         //
         $user = auth()->user()->find($id);
 
-        $user->delete();
+        if($user->delete()){
+            return response() ->json([
+                'success' => true,
+            ]);
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'El usuario no se puede eliminar',
+            ], 500);
+        }
     }
 }
