@@ -12,11 +12,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
 
-        $user = auth()->user()->find($id);
+        $user = auth()->user()->find();
         $users = User::all();
         if($user->id===15){
             return response() ->json([
@@ -28,26 +28,6 @@ class UserController extends Controller
             'success' => false,
             'data' => 'Necesitas ser administrador.'
         ], 400);
-
-        /* $user = auth()->user();
-
-        $users = User::all();
-
-        if($user->id === 15){
-
-            return response() ->json([
-                'success' => true,
-                'data' => $users,
-            ]);
-
-        } else {
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'Necesitas ser administrador.',
-            ], 400);
-
-        } */
         
     }
 
