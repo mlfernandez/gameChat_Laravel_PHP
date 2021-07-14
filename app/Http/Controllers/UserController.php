@@ -17,11 +17,12 @@ class UserController extends Controller
         //
 
         $user = auth()->user()->find($id);
+        $users = User::all();
         if($user->id===15){
             return response() ->json([
                 'success' => true,
                 'data' => $users,
-            ];
+            ]);
         }
         return response() ->json([
             'success' => false,
