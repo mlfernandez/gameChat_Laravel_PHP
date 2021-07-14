@@ -14,10 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // El administrador busca a todos los usuarios
 
-        $user = auth()->user()->find();
+        $user = auth()->user();
         $users = User::all();
+
         if($user->id===15){
             return response() ->json([
                 'success' => true,
