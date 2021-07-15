@@ -37,9 +37,39 @@ class PartyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    //Crear una party
+    public function store(Request $request, $game_id)
+
     {
         //
+
+        $this->validate($request, [
+            'nombre' => 'required|min:4',
+            'game_id' => 'required',
+            'user_id' => 'required'
+
+        ]);
+
+        $party = Party::create([
+            'name' => $request->name,
+            'game_id' => $request->game_id,
+            'user_id' => $request->user_id,
+
+        ]);
+
+        if (!$party) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha podido crear la party.'], 400);
+        } else {
+            return response() ->json([
+                'success' => true,
+                'data' => $party,
+            ], 200);
+        }
+
+
     }
 
     /**

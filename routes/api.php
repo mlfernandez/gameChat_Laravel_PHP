@@ -28,7 +28,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('users', UserController::class);
     // ruta para que el usuario haga logout
     Route::post('users/logout', [UserController::class,'logout']); 
-    // ruta crud completo de party
+    // ruta trae las parties por game_id
     Route::post('parties', [PartyController::class, 'index']);
-    
+    // ruta crud completo de party
+    Route::resource('parties', PartyController::class);
+
 });
