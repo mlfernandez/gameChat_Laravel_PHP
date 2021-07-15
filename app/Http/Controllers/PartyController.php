@@ -191,7 +191,7 @@ class PartyController extends Controller
                 'success' => false,
                 'data' => 'No se ha encontrado ningun Party.'], 400);
         } 
-        if ($resultado) {
+        if ($resultado -> delete()) {
             return response() ->json([
                 'success' => true,
                 'message' => 'Party eliminada.'], 200);
