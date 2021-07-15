@@ -22,8 +22,13 @@ Route::post('login', [PassportAuthController::class, 'login']);
 
 
 Route::middleware('auth:api')->group(function () {
-    Route::resource('posts', PostController::class);
+    // ruta crud de message
+    Route::resource('message', MessageController::class);
+    // ruta crud completo de user
     Route::resource('users', UserController::class);
+    // ruta para que el usuario haga logout
     Route::post('users/logout', [UserController::class,'logout']); 
+    // ruta crud completo de party
+    Route::resource('partys', PartyController::class);
     
 });

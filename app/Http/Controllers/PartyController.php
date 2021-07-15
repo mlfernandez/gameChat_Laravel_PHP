@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Party;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
@@ -12,9 +13,22 @@ class PartyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+     //Buscar una party por game_id
+    public function index($game_id)
     {
-        //
+        $resultado = Party::all()->where('game_id', '=', $game_id);
+        
+        if (!$resultado) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Party con ese juego.'], 400);
+
+        } else {
+            return $resultado;
+        }
+
+        }
     }
 
     /**
