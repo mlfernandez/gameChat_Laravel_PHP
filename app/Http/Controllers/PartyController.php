@@ -52,7 +52,7 @@ class PartyController extends Controller
         ]);
 
         $party = Party::create([
-            'name' => $request->name,
+            'nombre' => $request->nombre,
             'game_id' => $request->game_id,
             'user_id' => $request->user_id,
 
