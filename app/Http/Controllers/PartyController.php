@@ -145,10 +145,10 @@ class PartyController extends Controller
 
         // ruta busca parties y actualiza
         // PUT https://gamechat-laravel-mlf.herokuapp.com/api/parties/
-        // Postman: necestia "token" , "id" y "nombre" por body
-    public function update(Request $request)
+        // Postman: necestia "token" , por ruta "id" y "nombre" por body
+    public function update(Request $request, $id)
     {
-        $resultado = Party::where('id', '=', $request->id)->get();
+        $resultado = Party::where('id', '=', $id);
         if (!$resultado) {
             return response() ->json([
                 'success' => false,
