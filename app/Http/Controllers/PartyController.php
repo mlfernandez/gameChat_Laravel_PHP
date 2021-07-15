@@ -39,7 +39,7 @@ class PartyController extends Controller
      */
 
     //Crear una party
-    public function store(Request $request, $game_id)
+    public function store(Request $request)
 
     {
         //
@@ -47,7 +47,6 @@ class PartyController extends Controller
         $this->validate($request, [
             'nombre' => 'required|min:4',
             'game_id' => 'required',
-            'user_id' => 'required'
 
         ]);
 
