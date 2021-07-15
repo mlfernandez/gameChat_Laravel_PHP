@@ -25,7 +25,10 @@ class PartyController extends Controller
                 'data' => 'No se ha encontrado ningun Party con ese juego.'], 400);
 
         } else {
-            return $resultado;
+            return response() ->json([
+                'success' => true,
+                'data' => $resultado,
+            ], 200);
         }
 
         }
