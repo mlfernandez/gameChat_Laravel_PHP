@@ -17,7 +17,7 @@ class PartyController extends Controller
      //Buscar una party por game_id
      public function index($game_id)
      {
-         $resultado = Party::all()->where('game_id', '=', $game_id)->get();
+         $resultado = Party::where('game_id', '=', $game_id)->get();
          if (!$resultado) {
              return response() ->json([
                  'success' => false,
