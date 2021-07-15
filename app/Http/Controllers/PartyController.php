@@ -182,10 +182,10 @@ class PartyController extends Controller
 
         // ruta busca parties y elimina
         // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/parties/
-        // Postman: necestia "token" , "id" por body
-    public function destroy(Request $request)
+        // Postman: necestia "token" , "id" por url
+    public function destroy($id)
     {
-        $resultado = Party::where('id', '=', $request->id)->get();
+        $resultado = Party::where('id', '=', $id);
         if (!$resultado) {
             return response() ->json([
                 'success' => false,
