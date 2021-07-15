@@ -29,6 +29,6 @@ Route::middleware('auth:api')->group(function () {
     // ruta para que el usuario haga logout
     Route::post('users/logout', [UserController::class,'logout']); 
     // ruta crud completo de party
-    Route::resource('partys', PartyController::class);
+    Route::resource('parties', PartyController::class);
     
 });

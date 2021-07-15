@@ -13,7 +13,7 @@ class Game extends Model
             'title', 'images', 'url'
         ];
 
-        // Define la relacion de un game puede estar en muchas partys
+        // Define la relacion de un game puede estar en muchas parties
         public function party (){
             return $this -> hasMany(Party::class);
         }
