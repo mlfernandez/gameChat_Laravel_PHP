@@ -28,7 +28,7 @@ class PartyController extends Controller
                  'data' => $resultado,
              ], 200);
          }
-         }
+    }
     
 
     /**
@@ -76,9 +76,63 @@ class PartyController extends Controller
      * @param  \App\Models\Party  $party
      * @return \Illuminate\Http\Response
      */
-    public function show(Party $party)
+
+     // Muestra todas las parties
+    public function show()
     {
         //
+
+        $parties = Party::all();
+
+        if(!$parties){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'No se ha encontrado ninguna Party',
+            ], 400);
+
+        }
+
+        return response() ->json([
+            'success' => true,
+            'data' => $parties,
+        ]);
+    }
+
+    // Muestra todas las parties id (de party)
+    public function showById(Request $request)
+    {
+     
+        $resultado = Party::where('id', '=', $request->id)->get();
+        if (!$resultado) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Party.'], 400);
+        } else {
+            return response() ->json([
+                'success' => true,
+                'data' => $resultado,
+            ], 200);
+        }
+       
+    }
+
+    // Muestra todas las parties por nombre
+    public function showByName(Request $request)
+    {
+        
+        $resultado = Party::where('nombre', '=', $request->nombre)->get();
+        if (!$resultado) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Party.'], 400);
+        } else {
+            return response() ->json([
+                'success' => true,
+                'data' => $resultado,
+            ], 200);
+        }
+        
     }
 
     /**
