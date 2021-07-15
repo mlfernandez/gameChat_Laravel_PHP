@@ -42,7 +42,7 @@ Route::middleware('auth:api')->group(function () {
         // Postman: necestia token y game_id por body
     Route::post('parties', [PartyController::class, 'index']);
 
-        // ruta crud completo de party
+        // ruta crear party
         // Crear una party POST https://gamechat-laravel-mlf.herokuapp.com/api/parties
         // Postman: necesita token y nombre y game_id por body
     Route::resource('parties', PartyController::class);
@@ -53,12 +53,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('parties', [PartyController::class, 'show']);
 
         // ruta busca parties por id de party
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties 
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/showById
         // Postman: necestia token, id por body
     Route::post('parties/showById', [PartyController::class, 'showById']);
 
         // ruta busca parties por nombre party
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties 
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/showByName
         // Postman: necestia token y nombre por body
     Route::post('parties/showByName', [PartyController::class, 'showByName']);
 

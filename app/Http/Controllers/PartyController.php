@@ -14,7 +14,9 @@ class PartyController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //Buscar una party por game_id
+        // ruta trae las parties por game_id
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties 
+        // Postman: necestia "token" y "game_id"por body
      public function index(Request $request)
      {
          $resultado = Party::where('game_id', '=', $request->game_id)->get();
@@ -38,12 +40,13 @@ class PartyController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //Crear una party
+        // ruta crear party
+        // Crear una party POST https://gamechat-laravel-mlf.herokuapp.com/api/parties
+        // Postman: necesita "token" y "nombre" y "game_id" por body
     public function store(Request $request)
 
     {
         //
-
         $this->validate($request, [
             'nombre' => 'required|min:4',
             'game_id' => 'required',
@@ -53,7 +56,6 @@ class PartyController extends Controller
         $party = Party::create([
             'nombre' => $request->nombre,
             'game_id' => $request->game_id,
-
         ]);
 
         if (!$party) {
@@ -66,8 +68,6 @@ class PartyController extends Controller
                 'data' => $party,
             ], 200);
         }
-
-
     }
 
     /**
@@ -77,20 +77,18 @@ class PartyController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     // Muestra todas las parties
+        // Muestra todas las parties
+        // GET https://gamechat-laravel-mlf.herokuapp.com/api/parties 
+        // Postman: necestia "token"
     public function show()
     {
-        //
-
         $parties = Party::all();
 
         if(!$parties){
-
             return response() ->json([
                 'success' => false,
                 'message' => 'No se ha encontrado ninguna Party',
             ], 400);
-
         }
 
         return response() ->json([
@@ -99,10 +97,11 @@ class PartyController extends Controller
         ]);
     }
 
-    // Muestra todas las parties id (de party)
+        // ruta busca parties por id de party
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/showById
+        // Postman: necestia "token", "id" por body
     public function showById(Request $request)
     {
-     
         $resultado = Party::where('id', '=', $request->id)->get();
         if (!$resultado) {
             return response() ->json([
@@ -117,10 +116,11 @@ class PartyController extends Controller
        
     }
 
-    // Muestra todas las parties por nombre
+        // ruta busca parties por nombre party
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/showByName
+        // Postman: necestia "token" y "nombre" por body
     public function showByName(Request $request)
     {
-        
         $resultado = Party::where('nombre', '=', $request->nombre)->get();
         if (!$resultado) {
             return response() ->json([
@@ -142,9 +142,34 @@ class PartyController extends Controller
      * @param  \App\Models\Party  $party
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Party $party)
+
+        // ruta busca parties y actualiza
+        // PUT https://gamechat-laravel-mlf.herokuapp.com/api/parties/
+        // Postman: necestia "token" , "id" y "nombre" por body
+    public function update(Request $request)
     {
-        //
+        $resultado = Party::where('id', '=', $request->id)->get();
+        if (!$resultado) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Party.'], 400);
+        } 
+
+        $updated = $resultado->update([
+            'nombre' => $request->input('nombre'),
+
+        ]);
+        if($updated){
+            return response() ->json([
+                'success' => true,
+            ]);
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'La Party no se puede actualizar',
+            ], 500);
+        }
+        
     }
 
     /**
@@ -153,8 +178,29 @@ class PartyController extends Controller
      * @param  \App\Models\Party  $party
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Party $party)
+
+
+        // ruta busca parties y elimina
+        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/parties/
+        // Postman: necestia "token" , "id" por body
+    public function destroy(Request $request)
     {
-        //
+        $resultado = Party::where('id', '=', $request->id)->get();
+        if (!$resultado) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Party.'], 400);
+        } 
+        if ($resultado) {
+            return response() ->json([
+                'success' => true,
+                'message' => 'Party eliminada.'], 200);
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'No se ha podido eliminar esa Party'
+            ], 500);
+        }
     }
+    
 }
