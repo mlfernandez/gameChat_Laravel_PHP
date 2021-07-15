@@ -15,23 +15,20 @@ class PartyController extends Controller
      */
 
      //Buscar una party por game_id
-    public function index($game_id)
-    {
-        $resultado = Party::all()->where('game_id', '=', $game_id);
-        
-        if (!$resultado) {
-            return response() ->json([
-                'success' => false,
-                'data' => 'No se ha encontrado ningun Party con ese juego.'], 400);
-
-        } else {
-            return response() ->json([
-                'success' => true,
-                'data' => $resultado,
-            ], 200);
-        }
-
-        }
+     public function index($game_id)
+     {
+         $resultado = Party::all()->where('game_id', '=', $game_id)->get();
+         if (!$resultado) {
+             return response() ->json([
+                 'success' => false,
+                 'data' => 'No se ha encontrado ningun Party con ese juego.'], 400);
+         } else {
+             return response() ->json([
+                 'success' => true,
+                 'data' => $resultado,
+             ], 200);
+         }
+         }
     
 
     /**
