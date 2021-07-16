@@ -93,7 +93,7 @@ class GameController extends Controller
             return response() ->json([
                 'success' => false,
                 'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 500);
-        } elseif (isEmpty($resultado)) {
+        } elseif ($resultado == []) {
             return response() ->json([
                 'success' => false,
                 'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 400);
