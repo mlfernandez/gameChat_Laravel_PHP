@@ -87,7 +87,7 @@ class GameController extends Controller
     public function showByName(Request $request)
     {
         $resultado = Game::where('title', '=', $request->title)->get();
-        if (!$resultado) {
+        if ($resultado == []) {
             return response() ->json([
                 'success' => false,
                 'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 400);
