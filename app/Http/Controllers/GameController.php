@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class GameController extends Controller
 {
     /**
@@ -90,7 +92,12 @@ class GameController extends Controller
         if (!$resultado) {
             return response() ->json([
                 'success' => false,
+                'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 500);
+        } elseif (isEmpty($resultado)) {
+            return response() ->json([
+                'success' => false,
                 'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 400);
+
         } else {
             return response() ->json([
                 'success' => true,
