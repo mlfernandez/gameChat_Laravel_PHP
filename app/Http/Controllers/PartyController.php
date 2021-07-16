@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Party;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
@@ -46,7 +45,6 @@ class PartyController extends Controller
     public function store(Request $request)
 
     {
-        //
         $this->validate($request, [
             'nombre' => 'required|min:4',
             'game_id' => 'required',

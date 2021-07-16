@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,13 +55,17 @@ Route::middleware('auth:api')->group(function () {
 
         // ruta busca parties por id de party
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/showById
-        // Postman: necestia token, id por body
+        // Postman: necestia "token", "id" por body
     Route::post('parties/showById', [PartyController::class, 'showById']);
 
         // ruta busca parties por nombre party
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/showByName
-        // Postman: necestia token y nombre por body
+        // Postman: necestia "token" y "nombre" por body
     Route::post('parties/showByName', [PartyController::class, 'showByName']);
 
+        // ruta CRUD game
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/games 
+        // Postman: necestia "token" y "title" por body
+    Route::resource('games', GameController::class);
 
 });
