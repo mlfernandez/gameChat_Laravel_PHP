@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Party_User;
+use App\Models\PartyUser;
 use Illuminate\Http\Request;
 
-class Party_UserController extends Controller
+class PartyUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class Party_UserController extends Controller
 
         if($user->id === 15){
 
-            $party_user = Party_User::all();
+            $partyuser = PartyUser::all();
 
             return response() ->json([
                 'success' => true,
-                'data' => $party_user,
+                'data' => $partyuser,
             ]);
         } else {
             return response() ->json([
@@ -46,16 +46,16 @@ class Party_UserController extends Controller
             'party_id' => 'required',
         ]);
 
-        $party_user = Party_User::create ([
+        $partyuser = PartyUser::create ([
             'user_id' => $user -> id,
             'party_id' => $request -> party_id,
         ]);
 
-        if ($party_user) {
+        if ($partyuser) {
 
             return response() ->json([
                 'success' => true,
-                'data' => $party_user
+                'data' => $partyuser
             ], 200);
     
         } else {
@@ -69,20 +69,20 @@ class Party_UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Party_User  $party_User
+     * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
     public function showByUser()
     {
         $user = auth()->user();
 
-        $party_ser = Party_User::where('user_id', '=', $user->id)->get();
+        $party_ser = PartyUser::where('user_id', '=', $user->id)->get();
 
         if($user->id){
 
             return response() ->json([
                 'success' => true,
-                'data' => $party_user,
+                'data' => $partyuser,
             ]);
 
         } else {
@@ -99,14 +99,14 @@ class Party_UserController extends Controller
     {
         $user = auth()->user();
 
-        $party_user = Party_User::where('party_id', '=',  $request -> party_id)->get();
+        $partyuser = PartyUser::where('party_id', '=',  $request -> party_id)->get();
 
 
         if($user->id){
 
             return response() ->json([
                 'success' => true,
-                'data' => $party_user,
+                'data' => $partyuser,
             ]);
 
         } else {
@@ -123,10 +123,10 @@ class Party_UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Party_User  $party_User
+     * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Party_User $party_User)
+    public function update(Request $request, PartyUser $partyUser)
     {
         //
     }
@@ -134,10 +134,10 @@ class Party_UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Party_User  $party_User
+     * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Party_User $party_User)
+    public function destroy(PartyUser $partyUser)
     {
         //
     }

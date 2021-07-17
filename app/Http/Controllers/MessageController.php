@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
-use App\Models\Party_User;
+use App\Models\PartyUser;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -54,7 +54,7 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        $checkUserInParty = Party_User::where('party_id', $request->party_id AND 'user_id', $user->id);
+        $checkUserInParty = PartyUser::where('party_id', $request->party_id AND 'user_id', $user->id);
 
         if ($checkUserInParty === []) {
 

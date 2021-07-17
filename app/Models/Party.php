@@ -24,7 +24,7 @@ class Party extends Model
         }
 
         // Define la relacion una party puede estar en muchas party-users
-        public function party_user (){
-            return $this -> hasMany(Party_User::class);
+        public function partyuser (){
+            return $this -> hasMany(PartyUser::class);
         }
 }

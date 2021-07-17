@@ -7,7 +7,7 @@ use App\Http\Controllers\PartyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\Party_UserController;
+use App\Http\Controllers\PartyUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,27 +106,27 @@ Route::middleware('auth:api')->group(function () {
         // Postman: necestia "token"  y "party_id" por body
     Route::post('messages/showByPartyId', [MessageController::class, 'showByPartyId']);
 
-     // PARTY_USERS // 
+     // PARTY USERS // 
 
         // ruta CRUD message
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/party_users 
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers 
         // Postman: necestia "token" y "text", "user_id" y "party_id" por body
-    Route::resource('partyusers', Party_UserController::class);
+    Route::resource('partyusers', PartyUserController::class);
 
         // ruta trae todos los message
-        // GET https://gamechat-laravel-mlf.herokuapp.com/api/party_users 
+        // GET https://gamechat-laravel-mlf.herokuapp.com/api/partyusers 
         // Postman: necestia token admin
-    Route::get('partyusers', [Party_UserController::class, 'show']);
+    Route::get('partyusers', [PartyUserController::class, 'show']);
 
         // ruta busca message por id
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/party_users/showByUser
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByUser
         // Postman: necestia "token" admin y "id" por url
-    Route::post('partyusers/showByUser', [Party_UserController::class, 'showByUser']);
+    Route::post('partyusers/showByUser', [PartyUserController::class, 'showByUser']);
 
         // ruta busca message por id de party
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/party_users/showByPartyId
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByPartyId
         // Postman: necestia "token"  y "party_id" por body
-    Route::post('partyusers/showByParty', [Party_UserController::class, 'showByParty']);
+    Route::post('partyusers/showByParty', [PartyUserController::class, 'showByParty']);
 
 
 

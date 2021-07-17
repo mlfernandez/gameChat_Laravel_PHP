@@ -19,8 +19,8 @@ class User extends Authenticatable
         }
 
         // Define la relacion de un usuario puede tener muchas parties
-        public function party_user (){
-            return $this -> hasMany(Party_User::class);
+        public function partyuser (){
+            return $this -> hasMany(PartyUser::class);
         }
 
 
