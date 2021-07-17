@@ -6,6 +6,7 @@ use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,5 +78,25 @@ Route::middleware('auth:api')->group(function () {
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/games/showByName
         // Postman: necestia "token" y "title" por body
     Route::post('games/showByName', [GameController::class, 'showByName']);
+
+        // ruta CRUD message
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages 
+        // Postman: necestia "token" y "text", "user_id" y "party_id" por body
+    Route::resource('messages', MessageController::class);
+
+        // ruta trae todos los message
+        // GET https://gamechat-laravel-mlf.herokuapp.com/api/games 
+        // Postman: necestia token admin
+    Route::get('messages', [MessageController::class, 'show']);
+
+        // ruta busca message por id
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/games/showById
+        // Postman: necestia "token" admin y "id" por url
+    Route::post('messages/showById', [MessageController::class, 'showById']);
+
+        // ruta busca message por id de party
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/games/showByPartyId
+        // Postman: necestia "token"  y "party_id" por body
+    Route::post('messages/showByPartyId', [MessageController::class, 'showByPartyId']);
 
 });
