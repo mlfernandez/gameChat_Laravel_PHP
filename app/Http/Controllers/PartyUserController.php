@@ -104,6 +104,9 @@ class PartyUserController extends Controller
         }
     }
 
+        // ruta busca las partys de un usuario
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByParty
+        // Postman: necestia "token", "party_id" por body 
     public function showByParty(Request $request)
     {
         $user = auth()->user();
@@ -146,8 +149,36 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PartyUser $partyUser)
+    public function destroy($id)
     {
-        //
+        $user = auth()->user();
+
+        
+
+        if($user->id){
+
+            $resultado = PartyUser::where('user_id', '=', $user->id)->get();
+
+            if (!$resultado) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha encontrado ningun Party.'], 400);
+            } 
+            if ($resultado -> delete()) {
+                return response() ->json([
+                    'success' => true,
+                    'message' => 'Ha dejado la party.'], 200);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se ha podido abandonar esa Party'
+                ], 500);
+            }
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'No tiene permiso para realizar esta acción.',
+            ], 400);
+        }
     }
 }
