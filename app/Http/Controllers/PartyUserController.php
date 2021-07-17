@@ -158,7 +158,7 @@ class PartyUserController extends Controller
 
        if($user->id === $userInParty){  
 
-            $resultado = PartyUser::where('user_id', '=', $request->user_id AND 'party_id', '=', $request->party_id)->get();
+            $resultado = PartyUser::where('user_id', $user->id AND 'party_id', $request->party_id)->get();
 
             if (!$resultado) {
                 return response() ->json([
