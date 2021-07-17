@@ -38,6 +38,10 @@ class PartyUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+        // ruta crear agregar un usuario a una party
+        // Crear una party POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers
+        // Postman: necesita "token" y "party_id" por body
     public function store(Request $request)
     {
         $user = auth()->user();
@@ -72,11 +76,16 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
+
+
+        // ruta busca las partys de un usuario
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByUser
+        // Postman: necestia "token", "user_id" por body 
     public function showByUser()
     {
         $user = auth()->user();
 
-        $party_ser = PartyUser::where('user_id', '=', $user->id)->get();
+        $partyuser = PartyUser::where('user_id', '=', $user->id)->get();
 
         if($user->id){
 
