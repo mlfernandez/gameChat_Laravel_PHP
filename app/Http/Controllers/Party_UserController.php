@@ -14,7 +14,22 @@ class Party_UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        if($user->id === 15){
+
+            $party_user = Party_User::all();
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party_user,
+            ]);
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'No tienes permiso de administrador para realizar esta acción.',
+            ], 400);
+        }
     }
 
     /**
@@ -25,7 +40,30 @@ class Party_UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        $this->validate( $request , [
+            'party_id' => 'required',
+        ]);
+
+        $party_user = Party_User::create ([
+            'user_id' => $user -> id,
+            'party_id' => $request -> party_id,
+        ]);
+
+        if ($party_user) {
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party_user
+            ], 200);
+    
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'No se pudo agregar el usuario a la party',
+            ], 500);
+        }
     }
 
     /**
@@ -34,9 +72,51 @@ class Party_UserController extends Controller
      * @param  \App\Models\Party_User  $party_User
      * @return \Illuminate\Http\Response
      */
-    public function show(Party_User $party_User)
+    public function showByUser()
     {
-        //
+        $user = auth()->user();
+
+        $party_user = Party_User::where('user_id', '=', $user->id)->get();
+
+        if($user->id){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party_user,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'No tienes permiso de administrador para realizar esta acción.',
+            ], 400);
+
+        }
+    }
+
+    public function showByParty(Request $request)
+    {
+        $user = auth()->user();
+
+        $party_user = Party_User::where('party_id', '=',  $request -> party_id)->get();
+
+
+        if($user->id){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party_user,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'No tienes permiso de administrador para realizar esta acción.',
+            ], 400);
+
+        }
     }
 
     /**
