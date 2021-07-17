@@ -76,7 +76,7 @@ class Party_UserController extends Controller
     {
         $user = auth()->user();
 
-        $party_user = Party_User::where('user_id', '=', $user->id)->get();
+        $party_ser = Party_User::where('user_id', '=', $user->id)->get();
 
         if($user->id){
 
