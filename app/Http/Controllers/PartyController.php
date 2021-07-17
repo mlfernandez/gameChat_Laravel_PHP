@@ -152,31 +152,43 @@ class PartyController extends Controller
 
         // ruta busca parties y actualiza
         // PUT https://gamechat-laravel-mlf.herokuapp.com/api/parties/
-        // Postman: necestia "token" , por ruta "id" y "nombre" por body
+        // Postman: necestia "token" de administrador (id 15 Mariana), por ruta "id" y "nombre" por body
     public function update(Request $request, $id)
     {
-        $resultado = Party::where('id', '=', $id);
-        if (!$resultado) {
-            return response() ->json([
-                'success' => false,
-                'data' => 'No se ha encontrado ningun Party.'], 400);
-        } 
 
-        $updated = $resultado->update([
-            'nombre' => $request->input('nombre'),
+        $user = auth()->user();
 
-        ]);
-        if($updated){
-            return response() ->json([
-                'success' => true,
+        if($user->id === 15){
+
+
+            $resultado = Party::where('id', '=', $id);
+            if (!$resultado) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha encontrado ningun Party.'], 400);
+            } 
+
+            $updated = $resultado->update([
+                'nombre' => $request->input('nombre'),
+
             ]);
+            if($updated){
+                return response() ->json([
+                    'success' => true,
+                ]);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'La Party no se puede actualizar',
+                ], 500);
+            }
+        
         } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'La Party no se puede actualizar',
-            ], 500);
+                'message' => 'Necesitas ser administrador para realizar esta acción.',
+            ], 400);
         }
-        
     }
 
     /**
@@ -189,25 +201,34 @@ class PartyController extends Controller
 
         // ruta busca parties y elimina
         // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/parties/
-        // Postman: necestia "token" , "id" por url
+        // Postman: necestia "token" de administrador (id 15 Mariana), "id" por url
     public function destroy($id)
     {
-        $resultado = Party::where('id', '=', $id);
-        if (!$resultado) {
-            return response() ->json([
-                'success' => false,
-                'data' => 'No se ha encontrado ningun Party.'], 400);
-        } 
-        if ($resultado -> delete()) {
-            return response() ->json([
-                'success' => true,
-                'message' => 'Party eliminada.'], 200);
+        $user = auth()->user();
+
+        if($user->id === 15){
+
+            $resultado = Party::where('id', '=', $id);
+            if (!$resultado) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha encontrado ningun Party.'], 400);
+            } 
+            if ($resultado -> delete()) {
+                return response() ->json([
+                    'success' => true,
+                    'message' => 'Party eliminada.'], 200);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se ha podido eliminar esa Party'
+                ], 500);
+            }
         } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'No se ha podido eliminar esa Party'
-            ], 500);
+                'message' => 'Necesitas ser administrador para realizar esta acción.',
+            ], 400);
         }
     }
-    
 }
