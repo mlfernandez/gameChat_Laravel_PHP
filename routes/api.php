@@ -108,27 +108,30 @@ Route::middleware('auth:api')->group(function () {
 
      // PARTY USERS // 
 
-        // ruta CRUD message
+        // ruta CRUD partyUser
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers 
         // Postman: necestia "token" y "text", "user_id" y "party_id" por body
     Route::resource('partyusers', PartyUserController::class);
 
-        // ruta trae todos los message
+        // ruta trae todos las partyUser
         // GET https://gamechat-laravel-mlf.herokuapp.com/api/partyusers 
         // Postman: necestia token admin
     Route::get('partyusers', [PartyUserController::class, 'show']);
 
-        // ruta busca message por id
+        // ruta busca partyUser por id usuario
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByUser
         // Postman: necestia "token" admin y "id" por url
     Route::post('partyusers/showByUser', [PartyUserController::class, 'showByUser']);
 
-        // ruta busca message por id de party
+        // ruta busca partyUser por id de party
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByPartyId
         // Postman: necestia "token"  y "party_id" por body
     Route::post('partyusers/showByParty', [PartyUserController::class, 'showByParty']);
 
-
+        // ruta para salir un usuario de una party
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers
+        // Postman: necestia "token"  y "party_id", "user_id" por body
+    Route::delete('partyusers', [PartyUserController::class, 'destroy']);
 
 
     
