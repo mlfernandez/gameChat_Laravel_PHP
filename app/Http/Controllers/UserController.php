@@ -12,10 +12,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+        // El administrador busca a todos los usuarios
+        // GET https://gamechat-laravel-mlf.herokuapp.com/api/users/
+        // Por postman el "token" del administrador (id 15 Mariana)
     public function index()
     {
-        // El administrador busca a todos los usuarios
-
         $user = auth()->user();
         $users = User::all();
 
@@ -49,6 +51,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+
+        // El user puede buscar sus datos por id
+        // GET https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
+        // se pasa la "id" por url
     public function show($id)
     {
         //
@@ -56,7 +62,7 @@ class UserController extends Controller
             if(!$user){
                 return response() ->json([
                     'success' => false,
-                    'message' => 'User not found',
+                    'message' => 'User no encontrado',
                 ], 400);
             }
             return response() ->json([
@@ -74,13 +80,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // funcion actualizar usuario 
-    // PUT https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
-    // pasar token del usuario que se va a eliminar por postman  
-    // pasar por body todos los campos que se pueden actualizar (cambien o no) - steamUsername, username, email
+        // funcion actualizar usuario 
+        // PUT https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
+        // pasar "token" del usuario que se va a eliminar por postman  
+        // pasar por body todos los campos que se pueden actualizar (cambien o no) - "steamUsername", "username", "email"
     public function update(Request $request, $id)
     {
-        //
 
         {
             $user = auth()->user()->find($id);
@@ -115,9 +120,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // funcion eliminar usuario 
-    // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
-    // pasar token del usuario que se va a eliminar por postman 
+        // funcion eliminar usuario 
+        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
+        // pasar "token" del usuario que se va a eliminar por postman 
     public function destroy($id)
     {
         //
@@ -135,9 +140,9 @@ class UserController extends Controller
         }
     }
 
-    // funcion logout de usuario 
-    // POST https://gamechat-laravel-mlf.herokuapp.com/api/users/logout
-    // pasar token por postman
+        // funcion logout de usuario 
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/users/logout
+        // pasar "token" por postman
     public function logout(Request $request)
     {
         $token = $request->user()->token();

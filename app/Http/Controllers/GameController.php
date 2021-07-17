@@ -28,34 +28,46 @@ class GameController extends Controller
 
         // ruta crear game
         // Crear una party POST https://gamechat-laravel-mlf.herokuapp.com/api/games
-        // Postman: necesita "token" y "title", "images" y "url" por body
+        // Postman: necesita "token" de administrador (id 15 usuario Mariana) y "title", "images" y "url" por body
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'title' => 'required|min:4',
-            'images' => 'required',
-            'url' => 'required',
 
-        ]);
+        $user = auth()->user();
 
-        $game = Game::create([
-            'title' => $request->title,
-            'images' => $request->images,
-            'url' => $request->url,
-        ]);
+        if($user->id === 15){
 
-        if (!$game) {
+            $this->validate($request, [
+                'title' => 'required|min:4',
+                'images' => 'required',
+                'url' => 'required',
+
+            ]);
+
+            $game = Game::create([
+                'title' => $request->title,
+                'images' => $request->images,
+                'url' => $request->url,
+            ]);
+
+            if (!$game) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha podido crear el game.'], 400);
+            } else {
+                return response() ->json([
+                    'success' => true,
+                    'data' => $game,
+                ], 200);
+            }
+        } else {
+
             return response() ->json([
                 'success' => false,
-                'data' => 'No se ha podido crear el game.'], 400);
-        } else {
-            return response() ->json([
-                'success' => true,
-                'data' => $game,
-            ], 200);
+                'message' => 'Tienes que ser administrador para crear un juego.',
+            ], 400);
+
         }
-    }
 
     /**
      * Display the specified resource.
@@ -92,12 +104,11 @@ class GameController extends Controller
         if (!$resultado) {
             return response() ->json([
                 'success' => false,
-                'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 500);
+                'data' => 'No se ha podido procesar la solicitud'], 500);
         } elseif ($resultado->isEmpty()) {
             return response() ->json([
                 'success' => false,
-                'data' => 'No se ha encontrado ningun Game con ese título: .' . $request->title], 400);
-
+                'data' => 'No se ha encontrado ningun Game con ese título: ' . $request->title], 400);
         } else {
             return response() ->json([
                 'success' => true,

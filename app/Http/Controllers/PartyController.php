@@ -105,6 +105,11 @@ class PartyController extends Controller
             return response() ->json([
                 'success' => false,
                 'data' => 'No se ha encontrado ningun Party.'], 400);
+
+        } elseif ($resultado->isEmpty()) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Party con esa id: ' . $request->id], 400);        
         } else {
             return response() ->json([
                 'success' => true,
@@ -124,6 +129,10 @@ class PartyController extends Controller
             return response() ->json([
                 'success' => false,
                 'data' => 'No se ha encontrado ningun Party.'], 400);
+        } elseif ($resultado->isEmpty()) {
+            return response() ->json([
+                'success' => false,
+                'data' => 'No se ha encontrado ningun Game con ese título: ' . $request->nombre], 400);
         } else {
             return response() ->json([
                 'success' => true,
