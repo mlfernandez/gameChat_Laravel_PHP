@@ -75,7 +75,7 @@ Route::middleware('auth:api')->group(function () {
 
         // ruta busca games por nombre game
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/games/showByName
-        // Postman: necestia "token" y "nombre" por body
+        // Postman: necestia "token" y "title" por body
     Route::post('games/showByName', [GameController::class, 'showByName']);
 
 });

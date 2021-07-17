@@ -102,6 +102,7 @@ class GameController extends Controller
     public function showByName(Request $request)
     {
         $resultado = Game::where('title', '=', $request->title)->get();
+
         if (!$resultado) {
             return response() ->json([
                 'success' => false,
@@ -128,35 +129,46 @@ class GameController extends Controller
      */
         // ruta busca games y actualiza
         // PUT https://gamechat-laravel-mlf.herokuapp.com/api/games/
-        // Postman: necestia "token" , por ruta "id" y "title", "images" y "url" por body
+        // Postman: necestia "token" de administrador (id 15 Mariana) , por ruta "id" y "title", "images" y "url" por body
     public function update(Request $request, $id)
     {
-        $resultado = Game::where('id', '=', $id);
-        if (!$resultado) {
-            return response() ->json([
-                'success' => false,
-                'data' => 'No se ha encontrado ningun Game.'], 400);
-        } 
 
-        $updated = $resultado->update([
-            'title' => $request->input('title'),
-            'images' => $request->input('images'),
-            'url' => $request->input('url'),
+        $user = auth()->user();
 
-        ]);
-        if($updated){
-            return response() ->json([
-                'success' => true,
+        if($user->id === 15){
+
+            $resultado = Game::where('id', '=', $id);
+
+            if (!$resultado) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha encontrado ningun Game.'], 400);
+            } 
+
+            $updated = $resultado->update([
+                'title' => $request->input('title'),
+                'images' => $request->input('images'),
+                'url' => $request->input('url'),
+
             ]);
+            if($updated){
+                return response() ->json([
+                    'success' => true,
+                ]);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'El Game no se puede actualizar',
+                ], 500);
+            }
         } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'El Game no se puede actualizar',
-            ], 500);
+                'message' => 'Necesitas ser administrador para realizar esta acción.',
+            ], 400);
         }
-        
-    }
 
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -165,24 +177,35 @@ class GameController extends Controller
      */
         // ruta busca games y elimina
         // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/games/
-        // Postman: necestia "token" , "id" por url
+        // Postman: necestia "token" de administrador (id 15 Mariana), "id" por url
     public function destroy($id)
     {
-        $resultado = Game::where('id', '=', $id);
-        if (!$resultado) {
-            return response() ->json([
-                'success' => false,
-                'data' => 'No se ha encontrado ningun Game.'], 400);
-        } 
-        if ($resultado -> delete()) {
-            return response() ->json([
-                'success' => true,
-                'message' => 'Game eliminado.'], 200);
+        
+        $user = auth()->user();
+
+        if($user->id === 15){
+
+            $resultado = Game::where('id', '=', $id);
+            if (!$resultado) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha encontrado ningun Game.'], 400);
+            } 
+            if ($resultado -> delete()) {
+                return response() ->json([
+                    'success' => true,
+                    'message' => 'Game eliminado.'], 200);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se ha podido eliminar ese Game'
+                ], 500);
+            }
         } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'No se ha podido eliminar ese Game'
-            ], 500);
+                'message' => 'Necesitas ser administrador para realizar esta acción.',
+            ], 400);
         }
     }
 }
