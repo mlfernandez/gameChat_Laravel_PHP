@@ -158,7 +158,7 @@ class PartyUserController extends Controller
 
        if($user->id === $userInParty){   */
 
-            $resultado = PartyUser::where('user_id', $user->id AND 'party_id', $request->party_id)->delete();
+            $resultado = PartyUser::where('user_id', $user->id AND 'party_id', $request->party_id)->get()->delete();
 
             if (!$resultado) {
                 return response() ->json([
