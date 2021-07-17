@@ -76,7 +76,7 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-        // Muestra todas los games
+        // Muestra todos los games
         // GET https://gamechat-laravel-mlf.herokuapp.com/api/games 
         // Postman: necestia "token"
     public function show()
