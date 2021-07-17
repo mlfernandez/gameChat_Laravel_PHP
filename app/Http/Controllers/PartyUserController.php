@@ -152,7 +152,7 @@ class PartyUserController extends Controller
     public function destroy(Request $request)
     {
         $user = auth()->user();
-        $user_id = $request->id_user;
+        $user_id = $request->user_id;
 
         if($user->id === $user_id){
 
