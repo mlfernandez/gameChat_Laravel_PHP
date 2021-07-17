@@ -149,13 +149,13 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $party_id)
+    public function destroy(Request $request, $party_id, $user_id)
     {
         $user = auth()->user();
 
         if($user->id === $request->user_id){
 
-            $resultado = PartyUser::where('party_id', '=', $party_id);
+            $resultado = PartyUser::where('party_id', '=', $party_id AND 'user_id', '=', $user_id);
             if (!$resultado) {
                 return response() ->json([
                     'success' => false,
