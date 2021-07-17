@@ -56,7 +56,7 @@ class MessageController extends Controller
 
         $checkUserInParty = Party_User::where('party_id', $request->party_id AND 'user_id', $user->id);
 
-        if ($checkUserInParty->isEmpty()) {
+        if ($checkUserInParty === []) {
 
             $this->validate( $request , [
                 'text' => 'required',
