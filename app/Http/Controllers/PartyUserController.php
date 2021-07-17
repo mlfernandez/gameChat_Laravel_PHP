@@ -164,17 +164,17 @@ class PartyUserController extends Controller
             if ($resultado -> delete()) {
                 return response() ->json([
                     'success' => true,
-                    'message' => 'Party eliminada.'], 200);
+                    'message' => 'El usuario ha aboandonado la Party.'], 200);
             } else {
                 return response() ->json([
                     'success' => false,
-                    'message' => 'No se ha podido eliminar esa Party'
+                    'message' => 'No se ha podido realizar esa acción'
                 ], 500);
             }
         } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'Necesitas ser administrador para realizar esta acción.',
+                'message' => 'No tienes permisos para realizar esa acción.',
             ], 400);
         }
     }
