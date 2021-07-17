@@ -175,6 +175,7 @@ class PartyController extends Controller
             if($updated){
                 return response() ->json([
                     'success' => true,
+                    'message' => 'La Party se ha cambiado el nombre a:' . $request->nombre,
                 ]);
             } else {
                 return response() ->json([
