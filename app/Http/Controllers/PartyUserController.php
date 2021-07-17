@@ -149,37 +149,34 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $party_id)
     {
         $user = auth()->user();
-/*         $userInParty = $request->user_id;
 
-        
+        if($user->id === $request->user_id){
 
-       if($user->id === $userInParty){   */
-
-            $resultado = PartyUser::where('user_id', $user->id AND 'party_id', $request->party_id)->get()->delete();
-
+            $resultado = PartyUser::where('party_id', '=', $party_id);
             if (!$resultado) {
                 return response() ->json([
                     'success' => false,
                     'data' => 'No se ha encontrado ningun Party.'], 400);
             } 
-            if ($resultado) {
+            if ($resultado -> delete()) {
                 return response() ->json([
                     'success' => true,
-                    'message' => 'Ha dejado la party.'], 200);
+                    'message' => 'Party eliminada.'], 200);
             } else {
                 return response() ->json([
                     'success' => false,
-                    'message' => 'No se ha podido abandonar esa Party'
+                    'message' => 'No se ha podido eliminar esa Party'
                 ], 500);
             }
-/*          } else {
+        } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'No tiene permiso para realizar esta acción.',
-            ], 400); 
-         }  */
+                'message' => 'Necesitas ser administrador para realizar esta acción.',
+            ], 400);
+        }
     }
+
 }
