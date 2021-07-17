@@ -68,6 +68,7 @@ class GameController extends Controller
             ], 400);
 
         }
+    }
 
     /**
      * Display the specified resource.
