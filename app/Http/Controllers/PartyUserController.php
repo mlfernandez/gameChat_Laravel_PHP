@@ -149,9 +149,11 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $party_id, $user_id)
+    public function destroy(Request $request)
     {
         $user = auth()->user();
+        $user_id = $request->id_user;
+        $party_id = $request->id_party;
 
         if($user->id === $user_id){
 
