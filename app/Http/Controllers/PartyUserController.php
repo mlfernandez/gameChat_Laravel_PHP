@@ -153,11 +153,10 @@ class PartyUserController extends Controller
     {
         $user = auth()->user();
         $user_id = $request->id_user;
-        $party_id = $request->id_party;
 
         if($user->id === $user_id){
 
-            $resultado = PartyUser::where('party_id', $party_id AND 'user_id', $user_id);
+            $resultado = PartyUser::where('party_id', $request->party_id AND 'user_id', $user->id);
             if (!$resultado) {
                 return response() ->json([
                     'success' => false,
