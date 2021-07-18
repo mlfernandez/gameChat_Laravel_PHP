@@ -102,17 +102,42 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-        // ruta busca messages por id
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showById
-        // Postman: necestia "token" del admin (id 15 Mariana) y se pasa id por url
-    public function showById($id)
+        // ruta busca todos los messages
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages
+        // Postman: necestia "token" del admin (id 15 Mariana)
+    public function show()
     {
         $user = auth()->user();
 
+        $messages = Message::all();
+
         if($user->id === 15){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $messages,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'No tienes permiso para realizar esta acción.',
+            ], 400);
+
+        }
+    }
+
+        // ruta busca messages por id de usuario
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showById
+        // Postman: necestia "token" y se pasa id por url
+    public function showById($user_id)
+    {
+        $user = auth()->user();
+
+        if($user->id){
             
-            $message = Message::where('user_id', '=', $id)->get();
+            $message = Message::where('user_id', '=', $user_id)->get();
 
             if(!$message){
                 return response() ->json([
@@ -136,16 +161,16 @@ class MessageController extends Controller
     
             return response() ->json([
                 'success' => false,
-                'message' => 'Necesitas ser administrador para realizar esta acción.',
+                'message' => 'Necesitas ser el usuario creador para realizar esta acción.',
             ], 400);
     
         }
     }
 
 
-    public function showByPartyId($id)
+    public function showByPartyId($party_id)
     {
-        $message = Message::where('party_id', '=', $id)->get();
+        $message = Message::where('party_id', '=', $party_id)->get();
 
         if(!$message){
             return response() ->json([
