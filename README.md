@@ -183,7 +183,23 @@ detele message
 9. Logout
 <img src="public/img/9logout.JPG" alt="Trello"/>
 
+### Extra endpoints
 
+#### Admin
+
+1. Search all users
+2. Create, Detele, Update Games
+3. Delete Party 
+
+#### Users
+
+1. User search by user_id
+2. Search games
+3. Search games by title
+4. Search all parties
+5. Find party by id / name
+6. Find message by user_id
+7. find partyUser by user_id and party_id
 
 
 <a name="id6"></a>
@@ -191,6 +207,7 @@ detele message
 ## **Deploy**
 
 Backend deployed Heroku: https://gamechat-laravel-mlf.herokuapp.com/
+Postman: https://documenter.getpostman.com/view/15824691/TzmChYYc
 
 Admin Login: 
 email: mariana@gmail.com

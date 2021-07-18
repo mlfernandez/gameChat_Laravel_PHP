@@ -116,7 +116,7 @@ class PartyUserController extends Controller
         }
     }
 
-        // ruta busca las partys de un usuario
+        // ruta busca las partys de una party_id
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers/showByParty
         // Postman: necestia "token", "party_id" por body 
     public function showByParty(Request $request)
