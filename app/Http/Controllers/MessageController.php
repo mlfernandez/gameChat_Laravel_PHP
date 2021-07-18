@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use App\Models\PartyUser;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class MessageController extends Controller
 {
@@ -51,42 +52,50 @@ class MessageController extends Controller
         // Crear un message POST https://gamechat-laravel-mlf.herokuapp.com/api/message
         // Postman: necesita "token" y "text", "user_id" y "party_id" por body
     public function store(Request $request)
+
     {
+
+
+        $this->validate( $request , [
+            'text' => 'required',
+            'party_id' => 'required',
+        ]);
+
+
         $user = auth()->user();
 
         // chequea si ya esta en la party
-        $checkUserInParty = PartyUser::where('party_id', $request->party_id)->where('user_id', '=', $user->id)->get();
+        $checkUserInParty = PartyUser::where('party_id','=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if (!$checkUserInParty->isEmpty()) {
+        if ($checkUserInParty->isEmpty()) {
 
-            $this->validate( $request , [
-                'text' => 'required',
-                'party_id' => 'required',
-            ]);
-
-            $message = Message::create ([
-                'text' => $request -> text,
-                'user_id' => $user->id,
-                'party_id' => $request -> party_id,
-            ]);
-
-            if ($message) {
-                return response() ->json([
-                    'success' => true,
-                    'data' => $message
-                ], 200);
-            } else {
-
-            return response() ->json([
-                'success' => false,
-                'message' => 'El mensaje no se puedo crear',
-            ], 500);
-            }
-        } else {
             return response() ->json([
                 'success' => false,
                 'message' => 'El usuario no esta en esa party',
             ], 400);
+
+        } else {
+            try{
+                Message::create ([
+                    'text' => $request -> text,
+                    'user_id' => $user->id,
+                    'party_id' => $request -> party_id,
+                ]);
+
+                return response() ->json([
+                    'success' => true,
+                    'message' => "Mensaje enviado"
+                ], 200);
+
+            }catch(QueryException $err){
+                return response()->json([
+                    'success' => false,
+                    'data' => $err
+                ], 400); 
+
+           
+            }
+        
         }
         
     }
