@@ -1,62 +1,165 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<a name="top"></a>
+
+
+<h1 align="center" >Front Rental Movie</h1>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="src/images/logosmall.png" alt="Smile" width="350"/>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<br/>
+<br/>
+<br/>
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+:speech_balloon: [About](#id1)   
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+:hammer: [Tools](#id2)
 
-## Laravel Sponsors
+:clipboard: [Instructions](#id3)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+:eye_speech_bubble: [Phase I - Creating the Backend](#id4)
 
-### Premium Partners
+:eye_speech_bubble: [Phase II - Creating the Frontend](#id5)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+:collision: [Deploy](#id7)
 
-## Contributing
+:smile: [Thanks](#id8)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+<a name="id1"></a>
+## **About**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+This is the frontend for a future movie rental application.
 
-## Security Vulnerabilities
+Currently, the search for movies and series is being carried out by connecting to the free API the Movie Database.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+This project is part of the [GeeksHubs Academy](https://bootcamp.geekshubsacademy.com/) Full Stack Developer Bootcamp. 
 
-## License
+---
+**Phase I**
+Backend - If you want to see the repository visit: https://github.com/mlfernandez/proyecto4Backend_Movie
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Phase II**
+**Start date:** 21 / Jun /2021
+**Deadline:** 07 / Jul / 2021
+
+**Contributors:**
+* [Mariana Fernández Sacristán](https://github.com/mlfernandez)
+
+---
+
+<a name="id2"></a>
+
+## **Tools**
+
+To create this project we worked with these tools and technologies:
+
+| <img src="src/images/logovisual.png" alt="Visual" width="30"/> | Visual Studio Code |
+
+| <img src="src/images/javascript2.png" alt="JavaScript" width="30"/> | JavaScript | 
+
+| <img src="src/images/nodejs.png" alt="HTML5" width="30"/> | NODE JS & EXPRESS |
+
+| <img src="src/images/axios.png" alt="CSS3" width="30"/> | AXIOS | 
+
+| <img src="src/images/git.png" alt="Git" width="30"/> | Git |
+
+| <img src="src/images/github2.png" alt="GitHub" width="30"/> | GitHub | 
+
+| <img src="src/images/tmd.jpg" alt="GitHub" width="30"/> | The Movie Database API | 
+
+| <img src="src/images/react.png" alt="GitHub" width="30"/> | React | 
+
+| <img src="src/images/redux.jpg" alt="GitHub" width="30"/> | Redux | 
+
+| <img src="src/images/sequelize.png" alt="GitHub" width="30"/> | Sequelize | 
+
+| <img src="src/images/sass.png" alt="GitHub" width="30"/> | Sass | 
+
+
+
+<a name="id3"></a>
+***
+## **Instructions**
+
+
+<h3> Starting the project </h3>
+   
+We need to install:
+
+```javascript
+npx create-react-app "name"
+npm i react-router-dom
+npm i --save redux
+npm install --save react-redux
+npm i --save redux-localstorage-simple
+npm i axios
+```
+
+
+<a name="id4"></a>
+## Phase I Creating the Backend
+
+If you want to know about the Phase I, you can see the backend repository here.
+
+
+<a name="id5"></a>
+## Phase II - Creating the Frontend
+### Required endpoints
+
+* Usuario login/logout.
+* Vista área cliente.
+* Alquier película.
+* Busqueda pelicula por título y genero.
+* Alquileres en marcha.
+* Vista administrador de todos los alquileres de todos los usuarios.
+
+### Required endpoints
+
+##### Vista Registro de Usuario
+<br>
+<br>
+<img src="src/images/videoRegistroUsuario.gif" alt="GitHub"/>
+<br>
+<br>
+
+##### Vista Panel de Usuario
+<br>
+<img src="src/images/videoPanelUsuario.gif" alt="GitHub"/>
+<br>
+<br>
+
+##### Vista Panel de Admin
+<br>
+<img src="src/images/videoPanelAdmin.gif" alt="GitHub"/>
+
+<a name="id6"></a>
+***
+## **Deploy**
+
+Frontend deployed AWS: https://develop.dm173yk4p8h0x.amplifyapp.com/
+
+Admin Login: 
+email: mariana@gmail.com
+password: 123456
+
+User Login:
+email: pedro@gmail.com
+password: 123456
+
+
+<a name="id7"></a>
+***
+## **Thanks**
+
+I would like to thank all my partners, always ready to solve doubts. 
+
+<br>
+<br>
+
+[UP](#top)
