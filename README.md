@@ -207,6 +207,7 @@ detele message
 ## **Deploy**
 
 Backend deployed Heroku: https://gamechat-laravel-mlf.herokuapp.com/
+
 Postman: https://documenter.getpostman.com/view/15824691/TzmChYYc
 
 Admin Login: 
