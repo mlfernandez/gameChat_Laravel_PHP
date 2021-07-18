@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PartyUser;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class PartyUserController extends Controller
 {
@@ -50,23 +51,34 @@ class PartyUserController extends Controller
             'party_id' => 'required',
         ]);
 
-        $partyuser = PartyUser::create ([
-            'user_id' => $user -> id,
-            'party_id' => $request -> party_id,
-        ]);
+            // chequea si ya esta en la party
+        $checkUserInParty = PartyUser::where('party_id', '=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if ($partyuser) {
+        if($checkUserInParty->isEmpty()){
+            $partyuser = PartyUser::create([
+                'user_id' => $user->id,
+                'party_id' => $request->party_id,
+            ]);
 
-            return response() ->json([
-                'success' => true,
-                'data' => $partyuser
-            ], 200);
-    
+
+            if ($partyuser) {
+
+                return response() ->json([
+                    'success' => true,
+                    'data' => $partyuser
+                ], 200);
+        
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se pudo agregar el usuario a la party',
+                ], 500);
+            }
         } else {
-            return response() ->json([
-                'success' => false,
-                'message' => 'No se pudo agregar el usuario a la party',
-            ], 500);
+            return response()->json([
+                'success' => true,
+                'message' => "Ya estas en esa party."
+            ], 200); 
         }
     }
 
@@ -149,35 +161,36 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($party_id)
     {
         $user = auth()->user();
-        $user_id = $request->user_id;
+        
+        // chequea si ya esta en la party
+        $checkUserInParty = PartyUser::where('party_id', '=', $party_id)->where('user_id', '=', $user->id)->get();
 
-        if($user->id === $user_id){
 
-            $resultado = PartyUser::where('party_id', '=', $request->party_id AND 'user_id', '=', $user_id);
-            if (!$resultado) {
-                return response() ->json([
-                    'success' => false,
-                    'data' => 'No se ha encontrado ningun Party.'], 400);
-            } 
-            if ($resultado -> delete()) {
-                return response() ->json([
-                    'success' => true,
-                    'message' => 'El usuario ha aboandonado la Party.'], 200);
-            } else {
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'No se ha podido realizar esa acción'
-                ], 500);
-            }
-        } else {
-            return response() ->json([
+        if($checkUserInParty->isEmpty()){
+            return response()->json([
                 'success' => false,
-                'message' => 'No tienes permisos para realizar esa acción.',
-            ], 400);
+                'message' => "No estás en esa party"
+            ], 400); 
+        }else {
+            try{
+                $resultado = PartyUser::selectRaw('id')
+                ->where('party_id', '=', $party_id)
+                ->where('user_id', '=', $user->id)->delete();
+
+                return response()->json([
+                    'success' => true,
+                    'messate' => "Has salido de la party"
+                ], 200); 
+
+            }catch(QueryException $err){
+                return response()->json([
+                    'success' => false,
+                    'data' => $err
+                ], 400); 
+            }
         }
     }
-
 }

@@ -131,8 +131,8 @@ Route::middleware('auth:api')->group(function () {
         // ruta para salir un usuario de una party
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers
         // Postman: necestia "token"  y "party_id", "user_id" por body
-    Route::delete('partyusers/leave', [PartyUserController::class, 'destroy']);
-
+/*     Route::delete('partyusers/leave', [PartyUserController::class, 'destroy']);
+ */
 
     
 });
