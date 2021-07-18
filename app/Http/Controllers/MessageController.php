@@ -219,43 +219,28 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = auth()->user();
-       
-        $message = Message::where('id', '=', $id)->get();  
-   
-
-
-        if($user->id == $request->user_id || $user->id === 15){
-
-            $resultado = Message::where('id', '=', $request->id)->get();
-
-            if (!$resultado) {
-                return response() ->json([
-                    'success' => false,
-                    'data' => 'No se ha encontrado ningun mensaje con esa id.'], 400);
-            } 
-
-            $updated = $message->fill($request->all())->save(); 
-
-        
-            if($updated){
-                return response() ->json([
-                    'success' => true,
-                    'message' => 'El mensaje ha sido actualizado',
-                ]);
-            } else {
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'El mensaje no ha podido actualizar',
-                ], 500);
-            }
-        } else {
-            return response() ->json([
-                'success' => false,
-                'message' => 'No tienes permisos para realizar esta acción.',
-                'data1' => $user->id,
-                'data2' => $request->user_id,
-            ], 400);
+        $request->validate([
+            'text' => 'required|string|min:1',
+        ]);
+        $user = $request->user();
+        $message = Message::find($id);
+        if (!$message) {
+            return response()->json([
+                'error' => "El mensaje no existe."
+            ]);
+        }
+        if ($message['user_id'] != $user['id']) {
+            return response()->json([
+                'error' => "El mensaje no te pertenece."
+            ]);
+        }
+        try {
+            return $message->update([
+                "text" => $request->text,
+                "edited" => true
+            ]);
+        } catch(QueryException $error) {
+             return $error;
         }
     }
 
