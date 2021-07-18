@@ -50,7 +50,7 @@ class MessageController extends Controller
 
         // ruta crear message
         // Crear un message POST https://gamechat-laravel-mlf.herokuapp.com/api/message
-        // Postman: necesita "token" y "text", "user_id" y "party_id" por body
+        // Postman: necesita "token" y "text", "party_id" por body
     public function store(Request $request)
 
     {
@@ -104,7 +104,7 @@ class MessageController extends Controller
 
 
         // ruta busca messages por id
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/games/showByName
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showById
         // Postman: necestia "token" del admin (id 15 Mariana) y se pasa id por url
     public function showById($id)
     {

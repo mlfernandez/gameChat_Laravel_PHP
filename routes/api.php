@@ -99,12 +99,12 @@ Route::middleware('auth:api')->group(function () {
         // ruta busca message por id
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showById
         // Postman: necestia "token" admin y "id" por url
-    Route::post('messages/showById', [MessageController::class, 'showById']);
+    Route::post('messages', [MessageController::class, 'showById']);
 
         // ruta busca message por id de party
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showByPartyId
         // Postman: necestia "token"  y "party_id" por body
-    Route::post('messages/showByPartyId', [MessageController::class, 'showByPartyId']);
+    Route::post('messages', [MessageController::class, 'showByPartyId']);
 
      // PARTY USERS // 
 
