@@ -241,6 +241,8 @@ class MessageController extends Controller
         }
         try {
             return $message->update([
+                "message" => $request->message,
+                "edited" => true,
                 'success' => true,
                 'message' => 'El mensaje ha sido actualizado',
             ], 200);
