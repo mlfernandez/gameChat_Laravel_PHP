@@ -227,21 +227,22 @@ class MessageController extends Controller
         if (!$message) {
             return response()->json([
                 'success' => false,
-                'data' => "El mensaje no existe."
-            ]);
+                'message' => "El mensaje no existe."
+            ], 400);
         }
         if ($message['user_id'] != $user['id']) {
             return response()->json([
                 'success' => false,
-                'data' => "El mensaje no te pertenece."
-            ]);
+                'message' => "El mensaje no te pertenece."
+            ], 400);
         }
         try {
             return $message->update([
                 "text" => $request->text,
                 "edited" => true,
-                'data' => "El mensaje se ha actualizado correctamente"
-            ]);
+                "success" => true,
+                'message' => "El mensaje se ha actualizado correctamente"
+            ],200);
         } catch(QueryException $error) {
              return $error;
         }
