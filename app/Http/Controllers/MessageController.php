@@ -221,22 +221,23 @@ class MessageController extends Controller
     {
         $user = auth()->user();
        
-        $userMessage = auth()->user()->messages()->find($id);
+        $message = Message::where('id', '=', $id)->get();  
+   
 
-        if (!$userMessage) {
+        if (!$message) {
             return response()->json([
                 'success' => false,
                 'message' => 'Post not found'
             ], 400);
         }
 
-        $updated = $userMessage->fill($request->all())->save();    
+        $updated = $message->fill($request->all())->save();    
 
 
         if ($updated)
             return response()->json([
                 'success' => true,
-                $userMessage,
+                $message,
                 
             ]);
         else
