@@ -235,10 +235,9 @@ class MessageController extends Controller
                     'data' => 'No se ha encontrado ningun mensaje con esa id.'], 400);
             } 
 
-            $updated = $resultado->update([
-                'text' => $request->input('text'),
+            $updated = $message->fill($request->all())->save(); 
 
-            ]);
+        
             if($updated){
                 return response() ->json([
                     'success' => true,
