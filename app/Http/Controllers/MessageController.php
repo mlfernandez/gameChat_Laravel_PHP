@@ -242,7 +242,7 @@ class MessageController extends Controller
                 "edited" => true,
                 "success" => true,
                 'message' => "El mensaje se ha actualizado correctamente"
-            ],200);
+            ]);
         } catch(QueryException $error) {
              return $error;
         }
