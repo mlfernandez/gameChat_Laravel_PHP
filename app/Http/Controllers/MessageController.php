@@ -240,7 +240,7 @@ class MessageController extends Controller
             return $message->update([
                 "text" => $request->text,
                 "edited" => true,
-                'message' => "El mensaje se ha actualizado correctamente"
+                'data' => "El mensaje se ha actualizado correctamente"
             ]);
         } catch(QueryException $error) {
              return $error;
