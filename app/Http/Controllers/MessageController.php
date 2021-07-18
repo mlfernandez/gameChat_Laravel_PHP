@@ -251,6 +251,8 @@ class MessageController extends Controller
             return response() ->json([
                 'success' => false,
                 'message' => 'No tienes permisos para realizar esta acción.',
+                'data1' => $user->id,
+                'data2' => $request->user_id,
             ], 400);
         }
     }
