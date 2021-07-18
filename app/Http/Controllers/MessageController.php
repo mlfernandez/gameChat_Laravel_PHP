@@ -162,12 +162,16 @@ class MessageController extends Controller
             return response() ->json([
                 'success' => false,
                 'message' => 'Necesitas ser el usuario creador para realizar esta acción.',
+                'data' => $user->id,
+                'data' => $request->user_id
             ], 400);
     
         }
     }
 
-
+        // ruta busca messages por id de party
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showByPartyId
+        // Postman: necestia "token" y se pasa party_id por body , el usuario que busca tiene que estar en la party
     public function showByPartyId(Request $request)
     {
         $user = auth()->user();
