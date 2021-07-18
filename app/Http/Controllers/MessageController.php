@@ -135,7 +135,7 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        if($user->id === $request->user_id){
+        if($user->id == $request->user_id){
             
             $message = Message::where('user_id', '=', $request->user_id)->get();
 
