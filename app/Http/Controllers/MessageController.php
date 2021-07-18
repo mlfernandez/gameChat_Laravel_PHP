@@ -224,30 +224,8 @@ class MessageController extends Controller
         $message = Message::where('id', '=', $id)->get();  
    
 
-        if (!$message) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Post not found'
-            ], 400);
-        }
 
-        $updated = $message->fill($request->all())->save();    
-
-
-        if ($updated)
-            return response()->json([
-                'success' => true,
-                $message,
-                
-            ]);
-        else
-            return response()->json([
-                'success' => false,
-                'message' => 'Post can not be updated'
-            ], 500);
-    }
-
-        /* if($user->id == $request->user_id || $user->id === 15){
+        if($user->id == $request->user_id || $user->id === 15){
 
             $resultado = Message::where('id', '=', $request->id)->get();
 
@@ -280,7 +258,7 @@ class MessageController extends Controller
                 'data2' => $request->user_id,
             ], 400);
         }
-    } */
+    }
 
     /**
      * Remove the specified resource from storage.
