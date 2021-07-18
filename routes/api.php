@@ -44,7 +44,7 @@ Route::middleware('auth:api')->group(function () {
         // ruta trae las parties por game_id
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties 
         // Postman: necestia token y game_id por body
-    Route::post('parties', [PartyController::class, 'index']);
+    Route::post('parties/index', [PartyController::class, 'index']);
 
         // ruta crear party
         // Crear una party POST https://gamechat-laravel-mlf.herokuapp.com/api/parties

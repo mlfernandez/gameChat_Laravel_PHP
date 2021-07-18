@@ -1,13 +1,7 @@
 <a name="top"></a>
 
 
-<h1 align="center" >Front Rental Movie</h1>
-
-<p align="center">
-  <img src="src/images/logosmall.png" alt="Smile" width="350"/>
-</p>
-
-
+<h1 align="center" >GameChat</h1>
 
 
 <br/>
@@ -17,36 +11,29 @@
 
 :speech_balloon: [About](#id1)   
 
-:hammer: [Tools](#id2)
+:speech_balloon: [Description & requisites](#id2)  
 
-:clipboard: [Instructions](#id3)
+:hammer: [Tools](#id3)
 
-:eye_speech_bubble: [Phase I - Creating the Backend](#id4)
+:clipboard: [Instructions](#id4)
 
-:eye_speech_bubble: [Phase II - Creating the Frontend](#id5)
+:eye_speech_bubble: [Creating the Backend](#id4)
 
-:collision: [Deploy](#id7)
+:collision: [Deploy](#id5)
 
-:smile: [Thanks](#id8)
+:smile: [Thanks](#id6)
 
 ---
 
 <a name="id1"></a>
 ## **About**
 
-This is the frontend for a future movie rental application.
-
-Currently, the search for movies and series is being carried out by connecting to the free API the Movie Database.
+This is the backend for a GameChat application.
 
 This project is part of the [GeeksHubs Academy](https://bootcamp.geekshubsacademy.com/) Full Stack Developer Bootcamp. 
 
----
-**Phase I**
-Backend - If you want to see the repository visit: https://github.com/mlfernandez/proyecto4Backend_Movie
-
-**Phase II**
-**Start date:** 21 / Jun /2021
-**Deadline:** 07 / Jul / 2021
+**Start date:** 12 / Jul /2021
+**Deadline:** 18 / Jul / 2021
 
 **Contributors:**
 * [Mariana Fernández Sacristán](https://github.com/mlfernandez)
@@ -55,101 +42,133 @@ Backend - If you want to see the repository visit: https://github.com/mlfernande
 
 <a name="id2"></a>
 
+## **Description & requisites**
+
+> Dada la situación sanitaria, una empresa tecnológica ha estado trabajando en
+remoto desde marzo de 2020. Esto ha implicado que nuestros compañeros
+hayan perdido el contacto humano que siempre se ha tenido, y es algo que la
+empresa desea cambiar.
+La empresa quiere dar un impulso a la manera que tienen los trabajadores de
+relacionarse, permitiendo que contacten entre ellos creando grupos de interés.
+Una primera fase de este proyecto es crear una aplicación web LFG, que
+permita que los empleados puedan contactar con otros compañeros para
+formar grupos para jugar a un videojuego, con el objetivo de poder compartir
+un rato de ocio afterwork.
+
+* RF.1 Los usuarios se tienen que poder registrar a la aplicación,
+estableciendo un usuario/contraseña.
+* RF.2 Los usuarios tienen que autenticarse a la aplicación haciendo login.
+* RF.3 Los usuarios tienen que poder crear Partías (grupos) por un
+determinado videojuego.
+* RF.4 Los usuarios tienen que poder buscar Partías seleccionando un
+videojuego.
+* RF.5 Los usuarios pueden entrar y salir de una Party.
+* RF.6 Los usuarios tienen que poder enviar mensajes a la Party. Estos
+mensajes tienen que poder ser editados y borrados por su usuario creador.
+* RF.7 Los mensajes que existan a una Party se tienen que visualizar como un
+chat común.
+* RF.8 Los usuarios pueden introducir y modificar sus datos de perfil, por
+ejemplo, su usuario de Steam.
+* RF.9 Los usuarios tienen que poder hacer logout de la aplicación web.
+
+<img src="public/img/trelloGameChat.JPG" alt="GitHub"/>
+
+---
+
+<a name="id3"></a>
+
 ## **Tools**
 
 To create this project we worked with these tools and technologies:
 
-| <img src="src/images/logovisual.png" alt="Visual" width="30"/> | Visual Studio Code |
+| <img src="public/img/logovisual.png" alt="Visual" width="30"/> | Visual Studio Code |
 
-| <img src="src/images/javascript2.png" alt="JavaScript" width="30"/> | JavaScript | 
+| <img src="public/img/laravel.png" alt="GitHub" width="30"/> | Laravel | 
 
-| <img src="src/images/nodejs.png" alt="HTML5" width="30"/> | NODE JS & EXPRESS |
+| <img src="public/img/php.png" alt="GitHub" width="30"/> | PHP | 
 
-| <img src="src/images/axios.png" alt="CSS3" width="30"/> | AXIOS | 
+| <img src="public/img/mysql.png" alt="GitHub" width="30"/> | MySql | 
 
-| <img src="src/images/git.png" alt="Git" width="30"/> | Git |
+| <img src="public/img/docker.png" alt="GitHub" width="30"/> | Docker | 
 
-| <img src="src/images/github2.png" alt="GitHub" width="30"/> | GitHub | 
+| <img src="public/img/heroku.png" alt="GitHub" width="30"/> | Heroku | 
 
-| <img src="src/images/tmd.jpg" alt="GitHub" width="30"/> | The Movie Database API | 
+| <img src="public/img/git.png" alt="Git" width="30"/> | Git |
 
-| <img src="src/images/react.png" alt="GitHub" width="30"/> | React | 
-
-| <img src="src/images/redux.jpg" alt="GitHub" width="30"/> | Redux | 
-
-| <img src="src/images/sequelize.png" alt="GitHub" width="30"/> | Sequelize | 
-
-| <img src="src/images/sass.png" alt="GitHub" width="30"/> | Sass | 
+| <img src="public/img/github2.png" alt="GitHub" width="30"/> | GitHub | 
 
 
 
-<a name="id3"></a>
+<a name="id4"></a>
 ***
 ## **Instructions**
 
 
 <h3> Starting the project </h3>
    
-We need to install:
+We need to install Laravel:
 
 ```javascript
-npx create-react-app "name"
-npm i react-router-dom
-npm i --save redux
-npm install --save react-redux
-npm i --save redux-localstorage-simple
-npm i axios
+composer global require laravel/installer
+```
+Create the project
+
+```javascript
+laravel new gameChat
 ```
 
+Create the models
 
-<a name="id4"></a>
-## Phase I Creating the Backend
+```javascript
+php artisan make:model Game
+php artisan make:model Party
+php artisan make:model PartyUser
+php artisan make:model Message
+```
+Create the migrations
 
-If you want to know about the Phase I, you can see the backend repository here.
-
+```javascript
+php artisan make:migration create_games
+php artisan make:migration create_parties
+php artisan make:migration create_partyusers
+php artisan make:migration create_message
+```
+Create the controllers
+```javascript
+php artisan make:controller GameController --api --model=Game
+php artisan make:controller PartyController --api --model=Party
+php artisan make:controller MessageController --api --model=Message
+php artisan make:controller PartyUserController --api --model=PartyUser
+```
 
 <a name="id5"></a>
-## Phase II - Creating the Frontend
+## Creating the Backend
 ### Required endpoints
 
-* Usuario login/logout.
-* Vista área cliente.
-* Alquier película.
-* Busqueda pelicula por título y genero.
-* Alquileres en marcha.
-* Vista administrador de todos los alquileres de todos los usuarios.
+##### Registro de Usuario
+<br>
 
-### Required endpoints
-
-##### Vista Registro de Usuario
-<br>
-<br>
-<img src="src/images/videoRegistroUsuario.gif" alt="GitHub"/>
-<br>
-<br>
 
 ##### Vista Panel de Usuario
 <br>
-<img src="src/images/videoPanelUsuario.gif" alt="GitHub"/>
-<br>
-<br>
+
 
 ##### Vista Panel de Admin
 <br>
-<img src="src/images/videoPanelAdmin.gif" alt="GitHub"/>
+
 
 <a name="id6"></a>
 ***
 ## **Deploy**
 
-Frontend deployed AWS: https://develop.dm173yk4p8h0x.amplifyapp.com/
+Backend deployed Heroku: https://gamechat-laravel-mlf.herokuapp.com/
 
 Admin Login: 
 email: mariana@gmail.com
 password: 123456
 
 User Login:
-email: pedro@gmail.com
+email: adriana@gmail.com
 password: 123456
 
 
