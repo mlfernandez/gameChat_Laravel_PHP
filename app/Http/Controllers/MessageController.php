@@ -217,14 +217,14 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $user = auth()->user();
        
 
         if($user->id == $request->user_id){
 
-            $resultado = Message::where('id', '=', $id);
+            $resultado = Message::where('id', '=', $request->id);
 
             if (!$resultado) {
                 return response() ->json([
