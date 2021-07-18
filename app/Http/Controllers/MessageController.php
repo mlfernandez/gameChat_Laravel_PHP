@@ -217,6 +217,10 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
+
+        // ruta busca parties y actualiza
+        // PUT https://gamechat-laravel-mlf.herokuapp.com/api/messages/
+        // Postman: necestia "token", por ruta "id del mensaje" y "text" e id de user por body
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -226,19 +230,20 @@ class MessageController extends Controller
         $message = Message::find($id);
         if (!$message) {
             return response()->json([
-                'error' => "El mensaje no existe."
-            ]);
+                'success' => false,
+                'data' => 'No se ha encontrado ningun mensaje con esa id.'], 400);
         }
         if ($message['user_id'] != $user['id']) {
             return response()->json([
-                'error' => "El mensaje no te pertenece."
-            ]);
+                'success' => false,
+                'message' => 'No tienes permisos para realizar esta acción.',
+            ], 400);
         }
         try {
             return $message->update([
-                "text" => $request->text,
-                "edited" => true
-            ]);
+                'success' => true,
+                'message' => 'El mensaje ha sido actualizado',
+            ], 200);
         } catch(QueryException $error) {
              return $error;
         }
