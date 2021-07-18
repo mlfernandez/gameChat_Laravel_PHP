@@ -110,7 +110,7 @@ class PartyUserController extends Controller
 
             return response() ->json([
                 'success' => false,
-                'message' => 'No tienes permiso de administrador para realizar esta acción.',
+                'message' => 'No tienes permiso para realizar esta acción.',
             ], 400);
 
         }

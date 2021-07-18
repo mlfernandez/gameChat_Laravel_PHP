@@ -135,7 +135,7 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        if($user->id){
+        if($user->id === $request->user_id){
             
             $message = Message::where('user_id', '=', $request->user_id)->get();
 
@@ -170,26 +170,39 @@ class MessageController extends Controller
 
     public function showByPartyId(Request $request)
     {
-        $message = Message::where('party_id', '=', $request->party_id)->get();
+        $user = auth()->user();
+        
+        // chequea si ya esta en la party
+        $checkUserInParty = PartyUser::where('party_id', '=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if(!$message){
-            return response() ->json([
-                'success' => false,
-                'message' => 'No se ha encontrado ningun mensaje',
-            ], 400);
+        if ($checkUserInParty) {
 
-        } elseif ($message->isEmpty()) {
-            return response() ->json([
-                'success' => false,
-                'message' => 'No se ha encontrado ningun mensaje',
+            $message = Message::where('party_id', '=', $request->party_id)->get();
+
+            if(!$message){
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se ha encontrado ningun mensaje',
                 ], 400);
 
-        } else {      
-            return response() ->json([
-                'success' => true,
-                'data' => $message,
-            ], 200);
-        } 
+            } elseif ($message->isEmpty()) {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se ha encontrado ningun mensaje',
+                    ], 400);
+
+            } else {      
+                return response() ->json([
+                    'success' => true,
+                    'data' => $message,
+                ], 200);
+            } 
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => "No estás en esa party"
+            ], 400); 
+        }
     }
 
     /**
