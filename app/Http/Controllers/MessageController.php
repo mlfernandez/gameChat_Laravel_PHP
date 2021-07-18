@@ -217,13 +217,13 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $message_id)
     {
         $request->validate([
             'text' => 'required|string|min:1',
         ]);
         $user = $request->user();
-        $message = Message::find($id);
+        $message = Message::find($message_id);
         if (!$message) {
             return response()->json([
                 'success' => false,
@@ -238,8 +238,7 @@ class MessageController extends Controller
         }
         try {
             return $message->update([
-                "text" => $request->text,
-                "edited" => true,
+                'text' => $request->text,
                 "success" => true,
                 'message' => "El mensaje se ha actualizado correctamente"
             ]);
@@ -254,8 +253,38 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+
+        // ruta busca parties y elimina
+        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/parties/
+        // Postman: necestia "token" de administrador (id 15 Mariana), "id" por url
+    public function destroy(Request $request, $message_id)
     {
-        //
+        $user = auth()->user();
+       
+
+        if($user->id == 15 || $user->id == $request->user_id){
+
+            $resultado = Message::where('id', '=', $message_id);
+            if (!$resultado) {
+                return response() ->json([
+                    'success' => false,
+                    'data' => 'No se ha encontrado ningun mensaje con esa id.'], 400);
+            } 
+            if ($resultado -> delete()) {
+                return response() ->json([
+                    'success' => true,
+                    'message' => 'Mensaje eliminado.'], 200);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se ha podido eliminar el mensaje'
+                ], 500);
+            }
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'No tienes permiso para realizar esta acción.',
+            ], 400);
+        }
     }
 }
