@@ -10,7 +10,10 @@ class Message extends Model
         use HasFactory;
 
         protected $fillable = [
-            'text'
+            'text',
+            'party_id',
+            'user_id'
+            
         ];
 
         // Define la relacion de un mensaje pertenece a un user

@@ -78,12 +78,12 @@ class MessageController extends Controller
                     'party_id' => $request -> party_id,
                 ]);
 
-                if ($message) {
-              
-                return response() ->json([
-                    'success' => true,
-                    'message' => "Mensaje enviado"
-                ], 200);
+            if ($message) {
+            
+            return response() ->json([
+                'success' => true,
+                'message' => "Mensaje enviado"
+            ], 200);
 
             } else { 
                 return response()->json([
