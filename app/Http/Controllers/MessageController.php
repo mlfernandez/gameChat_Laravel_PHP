@@ -103,7 +103,7 @@ class MessageController extends Controller
      */
 
         // ruta busca todos los messages
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages
+        // GET https://gamechat-laravel-mlf.herokuapp.com/api/messages
         // Postman: necestia "token" del admin (id 15 Mariana)
     public function show()
     {
@@ -131,13 +131,13 @@ class MessageController extends Controller
         // ruta busca messages por id de usuario
         // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showById
         // Postman: necestia "token" y se pasa id por url
-    public function showById($user_id)
+    public function showById(Request $request)
     {
         $user = auth()->user();
 
         if($user->id){
             
-            $message = Message::where('user_id', '=', $user_id)->get();
+            $message = Message::where('user_id', '=', $request->user_id)->get();
 
             if(!$message){
                 return response() ->json([
@@ -168,9 +168,9 @@ class MessageController extends Controller
     }
 
 
-    public function showByPartyId($party_id)
+    public function showByPartyId(Request $request)
     {
-        $message = Message::where('party_id', '=', $party_id)->get();
+        $message = Message::where('party_id', '=', $request->party_id)->get();
 
         if(!$message){
             return response() ->json([
