@@ -109,7 +109,7 @@ Route::middleware('auth:api')->group(function () {
             // ruta busca message por id de party
             // PUT https://gamechat-laravel-mlf.herokuapp.com/api/messages
             // Postman: necestia "token"  y "party_id" por body
-        Route::put('messages', [MessageController::class, 'update']);
+  /*       Route::put('messages', [MessageController::class, 'update']); */
 
 
      // PARTY USERS // 

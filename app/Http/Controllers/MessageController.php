@@ -217,12 +217,36 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $user = auth()->user();
        
+        $userMessage = auth()->user()->messages()->find($id);
 
-        if($user->id == $request->user_id || $user->id === 15){
+        if (!$userMessage) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post not found'
+            ], 400);
+        }
+
+        $updated = $userMessage->fill($request->all())->save();    
+
+
+        if ($updated)
+            return response()->json([
+                'success' => true,
+                $userMessage,
+                
+            ]);
+        else
+            return response()->json([
+                'success' => false,
+                'message' => 'Post can not be updated'
+            ], 500);
+    }
+
+        /* if($user->id == $request->user_id || $user->id === 15){
 
             $resultado = Message::where('id', '=', $request->id)->get();
 
@@ -255,7 +279,7 @@ class MessageController extends Controller
                 'data2' => $request->user_id,
             ], 400);
         }
-    }
+    } */
 
     /**
      * Remove the specified resource from storage.
