@@ -162,8 +162,8 @@ class MessageController extends Controller
             return response() ->json([
                 'success' => false,
                 'message' => 'Necesitas ser el usuario creador para realizar esta acción.',
-                'data' => $user->id,
-                'data' => $request->user_id
+                'data1' => $user->id,
+                'data2' => $request->user_id
             ], 400);
     
         }
