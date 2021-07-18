@@ -162,8 +162,6 @@ class MessageController extends Controller
             return response() ->json([
                 'success' => false,
                 'message' => 'Necesitas ser el usuario creador para realizar esta acción.',
-                'data1' => $user->id,
-                'data2' => $request->user_id
             ], 400);
     
         }
@@ -222,38 +220,37 @@ class MessageController extends Controller
     public function update(Request $request, $id)
     {
         $user = auth()->user();
-        $userIdMessage = $request->user_id;
+       
 
-        if($user->id === $userIdMessage){
+        if($user->id == $request->user_id){
 
-            $resultado = Message::where('user_id', '=', $id);
+            $resultado = Message::where('id', '=', $id);
 
             if (!$resultado) {
                 return response() ->json([
                     'success' => false,
-                    'data' => 'No se ha encontrado ningun Game.'], 400);
+                    'data' => 'No se ha encontrado ningun mensaje con esa id.'], 400);
             } 
 
             $updated = $resultado->update([
-                'title' => $request->input('title'),
-                'images' => $request->input('images'),
-                'url' => $request->input('url'),
+                'text' => $request->input('text'),
 
             ]);
             if($updated){
                 return response() ->json([
                     'success' => true,
+                    'message' => 'El mensaje ha sido actualizado',
                 ]);
             } else {
                 return response() ->json([
                     'success' => false,
-                    'message' => 'El Game no se puede actualizar',
+                    'message' => 'El mensaje no ha podido actualizar',
                 ], 500);
             }
         } else {
             return response() ->json([
                 'success' => false,
-                'message' => 'Necesitas ser administrador para realizar esta acción.',
+                'message' => 'No tienes permisos para realizar esta acción.',
             ], 400);
         }
     }
