@@ -217,6 +217,10 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
+
+        // ruta busca mensaje y actualiza
+        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/messages/
+        // Postman: necestia "token" del usuario que lo creo, "id" por url y "user_id" y "text" por body
     public function update(Request $request, $message_id)
     {
         $request->validate([
@@ -254,9 +258,9 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-        // ruta busca parties y elimina
-        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/parties/
-        // Postman: necestia "token" de administrador (id 15 Mariana), "id" por url
+        // ruta busca mensaje y elimina
+        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/messages/
+        // Postman: necestia "token" de administrador (id 15 Mariana) o del usuario que lo creo, "id" por url y "user_id" por body
     public function destroy(Request $request, $message_id)
     {
         $user = auth()->user();
