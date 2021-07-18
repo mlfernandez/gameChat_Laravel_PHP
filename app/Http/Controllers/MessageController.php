@@ -54,15 +54,12 @@ class MessageController extends Controller
     public function store(Request $request)
 
     {
-
+        $user = auth()->user();
 
         $this->validate( $request , [
             'text' => 'required',
             'party_id' => 'required',
         ]);
-
-
-        $user = auth()->user();
 
         // chequea si ya esta en la party
         $checkUserInParty = PartyUser::where('party_id','=', $request->party_id)->where('user_id', '=', $user->id)->get();
@@ -75,29 +72,27 @@ class MessageController extends Controller
             ], 400);
 
         } else {
-            try{
-                Message::create ([
+            $message = Message::create ([
                     'text' => $request -> text,
                     'user_id' => $user->id,
                     'party_id' => $request -> party_id,
                 ]);
 
+                if ($message) {
+              
                 return response() ->json([
                     'success' => true,
                     'message' => "Mensaje enviado"
                 ], 200);
 
-            }catch(QueryException $err){
+            } else { 
                 return response()->json([
                     'success' => false,
-                    'data' => $err
+                    'message' => "No se pudo enviar el mensaje"
                 ], 400); 
 
-           
             }
-        
-        }
-        
+        }     
     }
 
     /**
