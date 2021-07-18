@@ -172,10 +172,18 @@ class MessageController extends Controller
     {
         $user = auth()->user();
         
-        // chequea si ya esta en la party
-        $checkUserInParty = PartyUser::where('party_id', '=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if ($checkUserInParty) {
+        // chequea si ya esta en la party
+        $checkUserInParty = PartyUser::where('party_id','=', $request->party_id)->where('user_id', '=', $user->id)->get();
+
+        if ($checkUserInParty->isEmpty()) {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'El usuario no esta en esa party',
+            ], 400);
+
+        } else {
 
             $message = Message::where('party_id', '=', $request->party_id)->get();
 
@@ -197,11 +205,6 @@ class MessageController extends Controller
                     'data' => $message,
                 ], 200);
             } 
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => "No estás en esa party"
-            ], 400); 
         }
     }
 
