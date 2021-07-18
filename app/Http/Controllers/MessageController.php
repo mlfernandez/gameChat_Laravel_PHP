@@ -129,9 +129,9 @@ class MessageController extends Controller
     }
 
         // ruta busca messages por id de usuario
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showById
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/messages/showByUserId
         // Postman: necestia "token" y se pasa id por url
-    public function showById(Request $request)
+    public function showByUserId(Request $request)
     {
         $user = auth()->user();
 
