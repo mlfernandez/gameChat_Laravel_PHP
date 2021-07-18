@@ -142,46 +142,53 @@ php artisan make:controller PartyUserController --api --model=PartyUser
 ```
 
 <a name="id5"></a>
+
 ## Creating the Backend
+
+### Model
+
+<img src="public/img/modeloER.JPG" alt="model"/>
+
+
 ### Required endpoints
 
 1. User register
-<img src="public/img/1registroUsuario.JPG" alt="Trello"/>
+<img src="public/img/1registroUsuario.JPG" alt="postman"/>
 
 2. User login
-<img src="public/img/2loginUsuario.JPG" alt="Trello"/>
+<img src="public/img/2loginUsuario.JPG" alt="postman"/>
 
 3. Create a new Party
-<img src="public/img/3crearParty.JPG" alt="Trello"/>
+<img src="public/img/3crearParty.JPG" alt="postman"/>
 
 4. Search party by game_id
-<img src="public/img/4buscarpatyporidgame.JPG" alt="Trello"/>
+<img src="public/img/4buscarpatyporidgame.JPG" alt="postman"/>
 
 5. Join to a party
-<img src="public/img/5ausuarioentraenlaparty.JPG" alt="Trello"/>
+<img src="public/img/5ausuarioentraenlaparty.JPG" alt="postman"/>
 
 Leave a party
 
-<img src="public/img/5busuarioabandonalaparty.JPG" alt="Trello"/>
+<img src="public/img/5busuarioabandonalaparty.JPG" alt="postman"/>
 
 6. Create message
-<img src="public/img/6aenviarmsj.JPG" alt="Trello"/>
+<img src="public/img/6aenviarmsj.JPG" alt="postman"/>
 
 edit message
 
-<img src="public/img/6bactualizarmsj.JPG" alt="Trello"/>
+<img src="public/img/6bactualizarmsj.JPG" alt="postman"/>
 
 detele message
-<img src="public/img/6celiminarmsj.JPG" alt="Trello"/>
+<img src="public/img/6celiminarmsj.JPG" alt="postman"/>
 
 7. Search all mesagges from a party
-<img src="public/img/7msjdeunaparty.JPG" alt="Trello"/>
+<img src="public/img/7msjdeunaparty.JPG" alt="postman"/>
 
 8. User update profile
-<img src="public/img/8actualizarusuariodatos.JPG" alt="Trello"/>
+<img src="public/img/8actualizarusuariodatos.JPG" alt="postman"/>
 
 9. Logout
-<img src="public/img/9logout.JPG" alt="Trello"/>
+<img src="public/img/9logout.JPG" alt="postman"/>
 
 ### Extra endpoints
 
