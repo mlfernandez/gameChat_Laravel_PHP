@@ -14,7 +14,7 @@ class PartyController extends Controller
      */
 
         // ruta trae las parties por game_id
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties 
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/parties/index 
         // Postman: necestia "token" y "game_id"por body
      public function index(Request $request)
      {

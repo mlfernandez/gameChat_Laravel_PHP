@@ -71,7 +71,7 @@ chat común.
 ejemplo, su usuario de Steam.
 * RF.9 Los usuarios tienen que poder hacer logout de la aplicación web.
 
-<img src="public/img/trelloGameChat.JPG" alt="GitHub"/>
+<img src="public/img/trelloGameChat.JPG" alt="Trello"/>
 
 ---
 
@@ -83,15 +83,15 @@ To create this project we worked with these tools and technologies:
 
 | <img src="public/img/logovisual.png" alt="Visual" width="30"/> | Visual Studio Code |
 
-| <img src="public/img/laravel.png" alt="GitHub" width="30"/> | Laravel | 
+| <img src="public/img/laravel.png" alt="Laravel" width="30"/> | Laravel | 
 
-| <img src="public/img/php.png" alt="GitHub" width="30"/> | PHP | 
+| <img src="public/img/php.png" alt="php" width="30"/> | PHP | 
 
-| <img src="public/img/mysql.png" alt="GitHub" width="30"/> | MySql | 
+| <img src="public/img/mysql.png" alt="mysql" width="30"/> | MySql | 
 
-| <img src="public/img/docker.png" alt="GitHub" width="30"/> | Docker | 
+| <img src="public/img/docker.png" alt="docker" width="30"/> | Docker | 
 
-| <img src="public/img/heroku.png" alt="GitHub" width="30"/> | Heroku | 
+| <img src="public/img/heroku.png" alt="heroku" width="30"/> | Heroku | 
 
 | <img src="public/img/git.png" alt="Git" width="30"/> | Git |
 
@@ -145,16 +145,45 @@ php artisan make:controller PartyUserController --api --model=PartyUser
 ## Creating the Backend
 ### Required endpoints
 
-##### Registro de Usuario
-<br>
+1. User register
+<img src="public/img/1registroUsuario.JPG" alt="Trello"/>
+
+2. User login
+<img src="public/img/2loginUsuario.JPG" alt="Trello"/>
+
+3. Create a new Party
+<img src="public/img/3crearParty.JPG" alt="Trello"/>
+
+4. Search party by game_id
+<img src="public/img/4buscarpatyporidgame.JPG" alt="Trello"/>
+
+5. Join to a party
+<img src="public/img/5ausuarioentraenlaparty.JPG" alt="Trello"/>
+
+Leave a party
+
+<img src="public/img/5busuarioabandonalaparty.JPG" alt="Trello"/>
+
+6. Create message
+<img src="public/img/6aenviarmsj.JPG" alt="Trello"/>
+
+edit message
+
+<img src="public/img/6bactualizarmsj.JPG" alt="Trello"/>
+
+detele message
+<img src="public/img/6celiminarmsj.JPG" alt="Trello"/>
+
+7. Search all mesagges from a party
+<img src="public/img/7msjdeunaparty.JPG" alt="Trello"/>
+
+8. User update profile
+<img src="public/img/8actualizarusuariodatos.JPG" alt="Trello"/>
+
+9. Logout
+<img src="public/img/9logout.JPG" alt="Trello"/>
 
 
-##### Vista Panel de Usuario
-<br>
-
-
-##### Vista Panel de Admin
-<br>
 
 
 <a name="id6"></a>

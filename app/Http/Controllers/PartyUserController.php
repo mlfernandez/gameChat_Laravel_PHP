@@ -161,6 +161,10 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
+
+        // ruta para abandonar una party
+        // POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers
+        // Postman: necestia "token", "party_id" por url
     public function destroy($party_id)
     {
         $user = auth()->user();
